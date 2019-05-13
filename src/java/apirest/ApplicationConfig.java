@@ -8,6 +8,7 @@ package apirest;
 import java.util.Set;
 import javax.ws.rs.core.Application;
 
+
 /**
  *
  * @author Ivan Guzman
@@ -23,6 +24,8 @@ public class ApplicationConfig extends Application {
     
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(apirest.GenericResource.class);
+        resources.add(apirest.WithoutAnnotationsResource.class);
+        
     }
     
 }
