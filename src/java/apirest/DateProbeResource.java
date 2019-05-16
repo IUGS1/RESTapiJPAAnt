@@ -49,4 +49,29 @@ public class DateProbeResource {
         return response;
         
     }
+    
+    @GET @Path("dateFormat")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String dateFormat() {
+        String response;
+        
+        try {
+            String format = "yyyy/MM/dd";
+            SimpleDateFormat df = new SimpleDateFormat(format);
+            String strToParse = "2019/05/13";
+            Date myDate = df.parse(strToParse);
+            
+            String anotherFormat = "yyyyMMdd";
+            SimpleDateFormat anotherDf = new SimpleDateFormat(anotherFormat);
+            String strGotFromDate = anotherDf.format(myDate);
+            
+            response = "This is the format string that I´ve got: " + strGotFromDate;
+            
+        } catch (ParseException e) {
+            response = "Fail";
+        }
+        
+        return response;
+        
+    }
 }
