@@ -25,6 +25,7 @@ import javax.ws.rs.GET;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.Calendar;
 
 import TowaStandard.*;
 
@@ -78,7 +79,67 @@ public class DateProbeResource {
             response = "Fail";
         }
         
+        return response;   
+    }
+    
+    @GET @Path("calendar")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String calendar() {
+        String response;
+        
+        try {
+            String format = "yyyy/MM/dd-HH-mm-ss";
+            SimpleDateFormat df = new SimpleDateFormat(format);
+            
+            Date d1 = df.parse("2019/05/13-04-15-45");
+            Date d2 = df.parse("2019/05/13-01-45-12");
+            
+            System.out.print(d1);
+            System.out.print(d2);
+            
+            /* This is the process to reset the time * /
+            Calendar c1 = Calendar.getInstance();
+            Calendar c2 = Calendar.getInstance();
+                        
+            c1.setTime(d1);
+            c2.setTime(d2);
+            
+            c1.set(Calendar.HOUR, 0);
+            c1.set(Calendar.MINUTE, 0);
+            c1.set(Calendar.SECOND, 0);
+            
+            c2.set(Calendar.HOUR, 0);
+            c2.set(Calendar.MINUTE, 0);
+            c2.set(Calendar.SECOND, 0);
+            /* */
+            
+            d1 = DateProbeResource.dateDate(d1);
+            d2 = DateProbeResource.dateDate(d2);
+              
+            System.out.print(d1);
+            System.out.print(d2);
+            
+            if (d1.equals(d2)) {
+                response = "True";
+            } else {
+                response = "false";
+            }
+            
+        } catch (ParseException e) {
+            response = "It was problem";
+        }
+        
         return response;
         
+    }
+    
+    public static Date dateDate(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.HOUR, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        
+        return cal.getTime();
     }
 }
