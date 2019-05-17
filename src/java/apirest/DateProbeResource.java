@@ -26,6 +26,8 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
 
+import TowaStandard.*;
+
 @Path("DateProbe") 
 public class DateProbeResource {
     
@@ -61,11 +63,16 @@ public class DateProbeResource {
             String strToParse = "2019/05/13";
             Date myDate = df.parse(strToParse);
             
-            String anotherFormat = "yyyyMMdd";
+            String anotherFormat = "yyyy/MM/dd";
             SimpleDateFormat anotherDf = new SimpleDateFormat(anotherFormat);
             String strGotFromDate = anotherDf.format(myDate);
+            String strMaxValue = anotherDf.format(new Date(Long.MAX_VALUE));
+            String strMinValue = anotherDf.format(new Date(0));
             
             response = "This is the format string that I´ve got: " + strGotFromDate;
+            response = response + "     This is the max value: " + strMaxValue;
+            response = response + "     This is the min value: " + strMinValue;
+            
             
         } catch (ParseException e) {
             response = "Fail";
