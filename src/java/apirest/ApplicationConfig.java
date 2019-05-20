@@ -23,6 +23,7 @@ public class ApplicationConfig extends Application {
     }
     
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(apirest.ArrayListProbeResource.class);
         resources.add(apirest.DateProbeResource.class);
         resources.add(apirest.GenericResource.class);
         resources.add(apirest.JsonResource.class);

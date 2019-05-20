@@ -27,9 +27,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Calendar;
 import java.time.Duration;
-import java.time.Instant;
 
-import TowaStandard.*;
 
 @Path("DateProbe") 
 public class DateProbeResource {
@@ -154,15 +152,15 @@ public class DateProbeResource {
             String format = "yyyy/MM/dd-HH-mm-ss";
             SimpleDateFormat df = new SimpleDateFormat(format);
             
-            Date d1 = df.parse("2019/05/13-00-45-12");
-            Date d2 = df.parse("2019/05/14-00-45-12");
+            Date d1 = df.parse("2019/05/10-00-45-12");
+            Date d2 = df.parse("2019/05/13-00-45-12");
             
             System.out.print("This is date 1: " + d1);
             System.out.print("This is date 2: " + d2);
             
             Duration duration = Duration.between(d1.toInstant(), d2.toInstant());
             
-            System.out.print("The duration between both dates in minutes: " + Math.abs(duration.toMinutes()));
+            System.out.print("The duration between both dates in minutes: " + duration.toMinutes());
             
             response = "Succesful.";
             
