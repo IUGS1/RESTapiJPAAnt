@@ -26,6 +26,8 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Calendar;
+import java.time.Duration;
+import java.time.Instant;
 
 import TowaStandard.*;
 
@@ -141,5 +143,33 @@ public class DateProbeResource {
         cal.set(Calendar.SECOND, 0);
         
         return cal.getTime();
+    }
+    
+    @GET @Path("duration")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String duration() {
+        String response;
+        
+        try {
+            String format = "yyyy/MM/dd-HH-mm-ss";
+            SimpleDateFormat df = new SimpleDateFormat(format);
+            
+            Date d1 = df.parse("2019/05/13-00-45-12");
+            Date d2 = df.parse("2019/05/14-00-45-12");
+            
+            System.out.print("This is date 1: " + d1);
+            System.out.print("This is date 2: " + d2);
+            
+            Duration duration = Duration.between(d1.toInstant(), d2.toInstant());
+            
+            System.out.print("The duration between both dates in minutes: " + Math.abs(duration.toMinutes()));
+            
+            response = "Succesful.";
+            
+        } catch (ParseException e) {
+            response = "It was problem.";
+        }
+        
+        return response;
     }
 }
