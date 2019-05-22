@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 /**
  *
@@ -36,6 +37,17 @@ public class GenericResource {
         return "<html><body><h1>After Sucessfully insertion</body></h1></html>";
     }
     
+    @GET @Path("queryStudentNames")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String queryStudentNames() {   
+        
+        JPAExample example = new JPAExample();
+        List<String> studentNames = example.queryStudentsWithSameName("David");
+        System.out.print("The number of students with the same name is: " + studentNames.size());
+        
+        return "After Sucessfully query.";
+    }
+    
     @GET @Path("getHtmlAnother")
     @Produces(MediaType.TEXT_HTML)
     public String getHtmlAnother() {           
@@ -45,7 +57,7 @@ public class GenericResource {
     @GET @Path("getHtmlAnotherAgain")
     @Produces(MediaType.TEXT_HTML)
     public String getHtmlAnotherAgain() {           
-        return "<html><body><h1>getHtmlAnotherAgain</body></h1></html>";
+        return "<html><body><h1>getHtmlAnotherAgain</body></h1> </html>";
     }
     
 }
